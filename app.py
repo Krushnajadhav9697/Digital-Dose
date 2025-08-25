@@ -73,11 +73,11 @@ def chat():
     user_input = request.json.get("message", "").lower().strip()
     replies = []
 
-    # Handle greeting ONLY if input is greeting
+    # greeting 
     if user_input in ["hi", "hello", "hey","hii"]:
         replies.append(random.choice(responses["greeting"]))
 
-    # how are you
+    
     elif any(q in user_input for q in ["how are you", "how r u", "how u doing"]):
         replies.append(random.choice(responses["how_are_you"]))
 
@@ -103,13 +103,13 @@ def chat():
         if any(word in user_input for word in ["bye", "exit"]):
             replies.append(random.choice(responses["exit"]))
 
-    # fallback if nothing matched
+    #if nothing matched
     if not replies:
         replies.append(responses["fallback"])
 
     bot_reply = " and ".join(replies)
 
-    # Save to history
+    
     chat_history.append({
         "user": user_input,
         "bot": bot_reply,

@@ -22,7 +22,7 @@ AI-Lite Chatbot is a simple web-based chatbot built with **Flask**, **Python**, 
 - **Flask** – Web framework
 - **NLTK** – Natural language processing for tokenization
 - **Requests** – To fetch weather information from OpenWeatherMap API
-- **HTML, CSS, JavaScript (jQuery)** – Frontend
+- **HTML, CSS, JavaScript** – Frontend
 
 ---
 
