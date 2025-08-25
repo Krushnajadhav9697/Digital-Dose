@@ -29,7 +29,32 @@ AI-Lite Chatbot is a simple web-based chatbot built with **Flask**, **Python**, 
 ## Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd <repository-folder>
+
+   ```
+
+   2.**Create & activate a virtual environment (optional)**
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # On Mac/Linux
+   venv\Scripts\activate      # On Windows
+
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+
+   ```
+
+3. **Run the project**
+
+   ```
+   python app.py
+
    ```

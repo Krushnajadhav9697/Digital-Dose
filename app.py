@@ -9,8 +9,8 @@ nltk.download('punkt')
 
 responses = {
     "greeting": [
-        "Hi there! How can I help you today?", 
-        "Hello! What can I do for you?", 
+        "Hi there! How can I help you today?",
+        "Hello! What can I do for you?",
         "Hey! Need any help?"
     ],
     "time": "The current time is {}",
@@ -21,8 +21,8 @@ responses = {
         "I'm fine, thank you! Hope you're doing well."
     ],
     "exit": [
-        "Goodbye! Have a great day!", 
-        "Bye! Take care.", 
+        "Goodbye! Have a great day!",
+        "Bye! Take care.",
         "See you soon!"
     ],
     "fallback": "I'm not sure I understand. Can you rephrase?"
@@ -73,35 +73,37 @@ def chat():
     user_input = request.json.get("message", "").lower().strip()
     replies = []
 
-    # greetings
-    if any(greet in user_input for greet in ["hi", "hello", "hey"]):
+    # Handle greeting ONLY if input is greeting
+    if user_input in ["hi", "hello", "hey","hii"]:
         replies.append(random.choice(responses["greeting"]))
 
     # how are you
-    if any(q in user_input for q in ["how are you", "how r u", "how u doing"]):
+    elif any(q in user_input for q in ["how are you", "how r u", "how u doing"]):
         replies.append(random.choice(responses["how_are_you"]))
 
-    # time
-    if "time" in user_input:
-        replies.append(responses["time"].format(get_time()))
+    else:
+        # time
+        if "time" in user_input:
+            replies.append(responses["time"].format(get_time()))
 
-    # date
-    if "date" in user_input:
-        replies.append(responses["date"].format(get_date()))
+        # date
+        if "date" in user_input:
+            replies.append(responses["date"].format(get_date()))
 
-    # weather
-    if "weather" in user_input:
-        if "in" in user_input:
-            city = user_input.split("in", 1)[1].strip()
+        # weather
+        if "weather" in user_input:
+            city = "Mumbai"
+            if "in" in user_input:
+                city = user_input.split("in", 1)[1].strip()
+                if "and" in city:  # in case of "weather in delhi and time"
+                    city = city.split("and")[0].strip()
             replies.append(get_weather(city))
-        else:
-            replies.append(get_weather("Mumbai"))
 
-    # exit
-    if any(word in user_input for word in ["bye", "exit"]):
-        replies.append(random.choice(responses["exit"]))
+        # exit
+        if any(word in user_input for word in ["bye", "exit"]):
+            replies.append(random.choice(responses["exit"]))
 
-    # fallback if no match
+    # fallback if nothing matched
     if not replies:
         replies.append(responses["fallback"])
 
